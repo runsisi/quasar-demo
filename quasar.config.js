@@ -70,7 +70,9 @@ module.exports = configure(function (/* ctx */) {
       // polyfillModulePreload: true,
       // distDir
 
-      // extendViteConf (viteConf) {},
+      extendViteConf: (viteConf) => {
+        viteConf.resolve.alias['vue'] = 'vue/dist/vue.esm-bundler.js'
+      },
       // viteVuePluginOptions: {},
 
 
