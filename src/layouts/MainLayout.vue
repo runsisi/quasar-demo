@@ -28,7 +28,7 @@
       </q-toolbar>
 
       <q-list class="q-mt-lg" :class="{'q-px-lg': !$q.screen.sm}">
-        <q-item clickable tag="a" href="/" manual-focus>
+        <q-item clickable tag="a" to="/" :active="activeItem === 0" @click="setActiveItem(0)">
           <q-item-section avatar>
             <q-icon name="la la-home" />
           </q-item-section>
@@ -37,7 +37,7 @@
           </q-item-section>
         </q-item>
 
-        <q-item clickable tag="a" href="/customers">
+        <q-item clickable tag="a" to="/customers" :active="activeItem === 1" @click="setActiveItem(1)">
           <q-item-section avatar>
             <q-icon name="las la-users" />
           </q-item-section>
@@ -46,7 +46,7 @@
           </q-item-section>
         </q-item>
 
-        <q-item clickable tag="a" href="/library">
+        <q-item clickable tag="a" to="/library" :active="activeItem === 2" @click="setActiveItem(2)">
           <q-item-section avatar>
             <q-icon name="la la-camera" />
           </q-item-section>
@@ -55,7 +55,7 @@
           </q-item-section>
         </q-item>
 
-        <q-item clickable tag="a" href="/settings">
+        <q-item clickable tag="a" to="/settings" :active="activeItem === 3" @click="setActiveItem(3)">
           <q-item-section avatar>
             <q-icon name="settings" />
           </q-item-section>
@@ -64,7 +64,7 @@
           </q-item-section>
         </q-item>
 
-        <q-item clickable tag="a" href="/calendar">
+        <q-item clickable tag="a" to="/calendar" :active="activeItem === 4" @click="setActiveItem(4)">
           <q-item-section avatar>
             <q-icon name="la la-calendar" />
           </q-item-section>
@@ -73,7 +73,7 @@
           </q-item-section>
         </q-item>
 
-        <q-item clickable tag="a" href="/cards">
+        <q-item clickable tag="a" to="/cards" :active="activeItem === 5" @click="setActiveItem(5)">
           <q-item-section avatar>
             <q-icon name="la la-address-card" />
           </q-item-section>
@@ -82,7 +82,7 @@
           </q-item-section>
         </q-item>
 
-        <q-item clickable tag="a" href="/charts">
+        <q-item clickable tag="a" to="/charts" :active="activeItem === 6" @click="setActiveItem(6)">
           <q-item-section avatar>
             <q-icon name="la la-chart-bar" />
           </q-item-section>
@@ -91,7 +91,7 @@
           </q-item-section>
         </q-item>
 
-        <q-item clickable tag="a" href="/login">
+        <q-item clickable tag="a" to="/login" :active="activeItem === 7" @click="setActiveItem(7)">
           <q-item-section avatar>
             <q-icon name="la la-user" />
           </q-item-section>
@@ -153,6 +153,11 @@ const leftDrawerOpen = ref(false)
 
 const toggleLeftDrawer = () => {
   leftDrawerOpen.value = !leftDrawerOpen.value
+}
+
+const activeItem = ref(0)
+const setActiveItem = (id: number) => {
+  activeItem.value = id
 }
 
 </script>
