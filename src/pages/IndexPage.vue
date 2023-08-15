@@ -56,6 +56,7 @@
                 </q-card-section>
 
                 <q-card-section>
+                  <bar-chart></bar-chart>
                 </q-card-section>
               </q-card>
             </div>
@@ -146,6 +147,7 @@
 import {ref} from 'vue';
 
 import LineChart from 'components/LineChart.vue'
+import BarChart from "components/BarChart.vue";
 
 const account = ref<string>()
 const month = ref<string>()

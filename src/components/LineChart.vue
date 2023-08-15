@@ -16,14 +16,14 @@ const options = ref({
   },
   legend: {
     data: ['Line 1', 'Line 2', 'Line 3', 'Line 4', 'Line 5'],
-    bottom: 10,
+    top: 0,
   },
   grid: {
-    left: '3%',
-    right: '4%',
-    bottom: '20%',
-    top: '5%',
-    containLabel: true
+    left: '0%',
+    right: '0%',
+    bottom: '0%',
+    top: '0%',
+    containLabel: false
   },
   xAxis: [
     {
@@ -167,7 +167,7 @@ const options = ref({
 </script>
 
 <template>
-  <ECharts autoresize :option="options" style="height: 155px;" />
+  <ECharts autoresize :init-options="{width: 'auto', height: 'auto'}" :option="options"  style="height: 155px;" />
 </template>
 
 <style scoped lang="scss">
