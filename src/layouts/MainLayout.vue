@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHr lpr fFr" style="min-height: 956px">
+  <q-layout view="lHr lpr fFr">
 
     <q-header class="bg-white" v-if="$q.screen.lt.md">
       <q-toolbar>
