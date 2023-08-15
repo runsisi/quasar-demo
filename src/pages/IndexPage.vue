@@ -35,7 +35,7 @@
                 </q-card-section>
 
                 <q-card-section>
-
+                  <line-chart></line-chart>
                 </q-card-section>
               </q-card>
             </div>
@@ -56,7 +56,6 @@
                 </q-card-section>
 
                 <q-card-section>
-
                 </q-card-section>
               </q-card>
             </div>
@@ -144,13 +143,9 @@
 </template>
 
 <script setup lang="ts">
-import {Todo, Meta} from 'components/models';
 import {ref} from 'vue';
 
-
-const meta = ref<Meta>({
-  totalCount: 1200
-});
+import LineChart from 'components/LineChart.vue'
 
 const account = ref<string>()
 const month = ref<string>()
