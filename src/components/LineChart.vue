@@ -1,7 +1,27 @@
 <script setup lang="ts">
 import {computed} from 'vue'
 import ECharts from 'vue-echarts'
-import * as echarts from 'echarts'
+
+import * as echarts from 'echarts/core';
+import {
+  TitleComponent,
+  ToolboxComponent,
+  TooltipComponent,
+  GridComponent,
+  LegendComponent,
+} from 'echarts/components';
+import { LineChart } from 'echarts/charts';
+import { CanvasRenderer } from 'echarts/renderers';
+
+echarts.use([
+  TitleComponent,
+  ToolboxComponent,
+  TooltipComponent,
+  GridComponent,
+  LegendComponent,
+  LineChart,
+  CanvasRenderer,
+]);
 
 const props = defineProps({
   chartStyle: Object,
