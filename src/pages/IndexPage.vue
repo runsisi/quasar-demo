@@ -2,7 +2,6 @@
 import {ref, Ref} from 'vue';
 
 import BarChart from "components/BarChart.vue";
-import LineChart from "components/LineChart.vue";
 
 const account = ref<string>()
 const month = ref<string>()
@@ -12,14 +11,14 @@ const fetchData = async () => {
     setTimeout(resolve, 1000);
   })
 
-  return [12, 10, 6, 9, 7, 10]
+  return [12, 10, 6, 9, 7, {value: 10, itemStyle: {color: 'rgb(16, 22, 41)'}}]
 }
 
-fetchData().then((res: number[]) => {
+fetchData().then((res: (number|object)[]) => {
   barData.value = res
 })
 
-const barData: Ref<number[]> = ref([12, 10, 6, 9, 7, 10])
+const barData: Ref<(number|object)[]> = ref([])
 </script>
 
 <template>
@@ -59,8 +58,7 @@ const barData: Ref<number[]> = ref([12, 10, 6, 9, 7, 10])
                 </q-card-section>
 
                 <q-card-section class="q-pt-none">
-<!--                  <bar-chart :data="barData" :chart-style="{height: '155px'}" ></bar-chart>-->
-                  <line-chart :chart-style="{height: '155px'}"></line-chart>
+                  <bar-chart :data="barData" :formatter="'{c}'" :chart-style="{height: '155px'}" ></bar-chart>
                 </q-card-section>
               </q-card>
             </div>
@@ -81,7 +79,7 @@ const barData: Ref<number[]> = ref([12, 10, 6, 9, 7, 10])
                 </q-card-section>
 
                 <q-card-section class="q-pt-none">
-<!--                  <bar-chart :data="barData" :chart-style="{height: '155px'}" v-if="barData"></bar-chart>-->
+                  <bar-chart :data="barData" :formatter="(v: number) => `$${v}k`" :chart-style="{height: '155px'}" ></bar-chart>
                 </q-card-section>
               </q-card>
             </div>
@@ -102,7 +100,7 @@ const barData: Ref<number[]> = ref([12, 10, 6, 9, 7, 10])
                 </q-card-section>
 
                 <q-card-section class="q-pt-none">
-
+                  <bar-chart :data="[56, 43, 26, 39, 27, {value: 40, itemStyle: {color: 'rgb(16, 22, 41)'}}]" :chart-style="{height: '155px'}" ></bar-chart>
                 </q-card-section>
               </q-card>
             </div>

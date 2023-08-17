@@ -1,19 +1,37 @@
 <script setup lang="ts">
 import {computed} from 'vue'
 import ECharts from 'vue-echarts'
-import * as echarts from 'echarts'
+
+import * as echarts from 'echarts/core';
+import { BarChart } from 'echarts/charts';
+import { CanvasRenderer } from 'echarts/renderers';
+import { GridComponent, TooltipComponent, LegendComponent } from 'echarts/components';
+
+echarts.use([BarChart, CanvasRenderer, GridComponent, TooltipComponent, LegendComponent]);
 
 const props = defineProps<{
-  data: number[],
+  data: (number|object)[],
   chartStyle: object,
+  formatter?: string | Function,
 }>()
 
 const options = computed(() => {
+  let formatter: string | Function = '{c}'
+
+  if (props.formatter) {
+    formatter = props.formatter
+
+    if (typeof props.formatter === 'function') {
+      formatter = ({value}: {value: number}) => (props.formatter as Function)?.(value)
+    }
+  }
+
   return {
     color: ['#E2E8F0'],
     itemStyle: {
       borderRadius: [50, 50, 0, 0]
     },
+    barWidth: '60%',
     tooltip: {
       show: false,
     },
@@ -23,8 +41,8 @@ const options = computed(() => {
     grid: {
       left: '0%',
       right: '0%',
-      bottom: '0%',
-      top: '15%',
+      bottom: '3%',
+      top: '11%',
       show: false,
       containLabel: true,
     },
@@ -61,6 +79,7 @@ const options = computed(() => {
           show: true,
           position: 'top',
           color: '#767B88',
+          formatter,
         },
         data: props.data,
       },
