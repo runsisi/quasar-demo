@@ -1,3 +1,27 @@
+<script setup lang="ts">
+import {ref, Ref} from 'vue';
+
+import BarChart from "components/BarChart.vue";
+import LineChart from "components/LineChart.vue";
+
+const account = ref<string>()
+const month = ref<string>()
+
+const fetchData = async () => {
+  await new Promise(resolve => {
+    setTimeout(resolve, 1000);
+  })
+
+  return [12, 10, 6, 9, 7, 10]
+}
+
+fetchData().then((res: number[]) => {
+  barData.value = res
+})
+
+const barData: Ref<number[]> = ref([12, 10, 6, 9, 7, 10])
+</script>
+
 <template>
   <q-page class="q-pa-lg">
     <div class="row q-col-gutter-md">
@@ -20,7 +44,7 @@
 
           <q-card-section class="row q-pa-none">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-              <q-card flat class="card_style">
+              <q-card class="no-shadow card_style">
                 <q-card-section>
                   <div class="text-h6">
                     43
@@ -34,14 +58,15 @@
                   </div>
                 </q-card-section>
 
-                <q-card-section>
-                  <line-chart></line-chart>
+                <q-card-section class="q-pt-none">
+<!--                  <bar-chart :data="barData" :chart-style="{height: '155px'}" ></bar-chart>-->
+                  <line-chart :chart-style="{height: '155px'}"></line-chart>
                 </q-card-section>
               </q-card>
             </div>
 
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-              <q-card flat class="card_style">
+              <q-card class="no-shadow card_style">
                 <q-card-section>
                   <div class="text-h6">
                     $6,500
@@ -55,14 +80,14 @@
                   </div>
                 </q-card-section>
 
-                <q-card-section>
-                  <bar-chart></bar-chart>
+                <q-card-section class="q-pt-none">
+<!--                  <bar-chart :data="barData" :chart-style="{height: '155px'}" v-if="barData"></bar-chart>-->
                 </q-card-section>
               </q-card>
             </div>
 
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-              <q-card flat class="card_style">
+              <q-card class="no-shadow card_style">
                 <q-card-section>
                   <div class="text-h6">
                     291
@@ -76,7 +101,7 @@
                   </div>
                 </q-card-section>
 
-                <q-card-section>
+                <q-card-section class="q-pt-none">
 
                 </q-card-section>
               </q-card>
@@ -142,13 +167,3 @@
     </div>
   </q-page>
 </template>
-
-<script setup lang="ts">
-import {ref} from 'vue';
-
-import LineChart from 'components/LineChart.vue'
-import BarChart from "components/BarChart.vue";
-
-const account = ref<string>()
-const month = ref<string>()
-</script>
