@@ -19,6 +19,105 @@ fetchData().then((res: (number|object)[]) => {
 })
 
 const barData: Ref<(number|object)[]> = ref([])
+
+const tblColumns = [
+  {
+    name: 'name',
+    label: 'Name',
+    field: (row: any): any => row.name,
+    align: 'left',
+    sortable: true,
+  },
+  {
+    name: 'plan',
+    label: 'Plan',
+    field: 'plan',
+    align: 'left',
+    sortable: true,
+  },
+  {
+    name: 'balance',
+    label: 'Balance',
+    field: 'balance',
+    align: 'right',
+    sortable: true,
+  },
+  {
+    name: 'status',
+    label: 'Status',
+    field: 'status',
+    align: 'center',
+  },
+  {
+    name: 'action',
+    label: 'Action',
+    field: 'action',
+    align: 'right',
+  },
+]
+
+const status = new Map([
+  [0, {
+    str: 'Active',
+    color: 'positive',
+  }],
+  [1, {
+    str: 'Inactive',
+    color: 'orange',
+  }],
+  [2, {
+    str: 'Paused',
+    color: 'warning',
+  }],
+])
+
+const tblData = [
+  {
+    name: 'Winfield Stapforth',
+    email: 'wstapforth5@pcworld.com',
+    avatar: 'https://cdn.quasar.dev/img/avatar1.jpg',
+    plan: 'Premium',
+    balance: '$2,189',
+    status: 0,
+    action: 0,
+  },
+  {
+    name: 'Ruddy Jedrzej',
+    email: 'rjedrzej0@discuz.net',
+    avatar: 'https://cdn.quasar.dev/img/avatar2.jpg',
+    plan: 'Premium',
+    balance: '$2,189',
+    status: 1,
+    action: 0,
+  },
+  {
+    name: 'Elisabetta Wicklen',
+    email: 'ewicklen2@microsoft.com',
+    avatar: 'https://cdn.quasar.dev/img/avatar3.jpg',
+    plan: 'Premium',
+    balance: '$2,189',
+    status: 0,
+    action: 0,
+  },
+  {
+    name: 'Seka Fawdrey',
+    email: 'sfawdrey3@wired.com',
+    avatar: 'https://cdn.quasar.dev/img/avatar4.jpg',
+    plan: 'Premium',
+    balance: '$2,189',
+    status: 2,
+    action: 0,
+  },
+  {
+    name: 'Brunhilde Panswick',
+    email: 'bpanswick4@csmonitor.com',
+    avatar: 'https://cdn.quasar.dev/img/avatar5.jpg',
+    plan: 'Premium',
+    balance: '$2,189',
+    status: 0,
+    action: 0,
+  }
+]
 </script>
 
 <template>
@@ -147,17 +246,59 @@ const barData: Ref<(number|object)[]> = ref([])
           <q-card-section class="q-pl-none col-12">
             <div class="text-subtitle1 q-pl-md">
               New Customers
-              <q-btn type="a" flat no-caps icon-right="arrow_forward" href="/customers"
+              <q-btn type="a" flat no-caps push href="/customers"
                      class="text-grey-8 float-right"
                      style="padding: 4px; min-width: 0px; min-height: 0px;">
-                Show More
+                <span class="block">Show More</span>
+                <q-icon name="arrow_forward" right role="img"></q-icon>
               </q-btn>
             </div>
           </q-card-section>
 
           <q-card-section class="q-pa-none">
-            <q-table bordered class="no-shadow card_style">
+            <q-table bordered
+                     hide-pagination
+                     class="no-shadow card_style"
+                     :columns="tblColumns as any" :rows="tblData"
+                     :table-header-class="'text-grey-7'"
+            >
+              <template v-slot:[`body-cell-name`]="props">
+                <q-td class="text-left">
+                  <q-item dense class="q-pl-none q-py-sm">
+                    <q-item-section side>
+                      <q-avatar>
+                        <img :src="props.row.avatar" />
+                      </q-avatar>
+                    </q-item-section>
+                    <q-item-section>
+                      <q-item-label>
+                        {{props.row.name}}
+                      </q-item-label>
+                      <q-item-label class="text-grey-6">
+                        {{props.row.email}}
+                      </q-item-label>
+                    </q-item-section>
+                  </q-item>
+                </q-td>
+              </template>
 
+              <template v-slot:[`body-cell-status`]="props">
+                <q-td class="text-center">
+                  <q-chip outline :color="status.get(props.row.status)?.color" style="font-size: 12px">
+                    {{status.get(props.row.status)?.str}}
+                  </q-chip>
+                </q-td>
+              </template>
+
+              <template v-slot:[`body-cell-action`]="props">
+                <q-td class="text-right">
+                  <q-btn type="button" flat dense rounded class="text-grey-6"
+                         icon="more_horiz"
+                         v-if="props.row.status === 2"
+                  >
+                  </q-btn>
+                </q-td>
+              </template>
             </q-table>
           </q-card-section>
         </q-card>
