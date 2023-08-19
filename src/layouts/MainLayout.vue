@@ -28,75 +28,75 @@
       </q-toolbar>
 
       <q-list class="q-mt-lg" :class="{'q-px-lg': !$q.screen.sm}">
-        <q-item clickable tag="a" to="/" :active="isActiveItem(0)" @click="setActiveItem(0)">
+        <q-item clickable tag="a" :to="{name: 'home'}" :active="isActiveItem('home')">
           <q-item-section avatar>
             <q-icon name="la la-home" />
           </q-item-section>
           <q-item-section>
-            <q-item-label :class="isActiveItem(0) ? 'text-weight-bolder' : 'text-weight-medium'">Home</q-item-label>
+            <q-item-label :class="isActiveItem('home') ? 'text-weight-bolder' : 'text-weight-medium'">Home</q-item-label>
           </q-item-section>
         </q-item>
 
-        <q-item clickable tag="a" to="/customers" :active="isActiveItem(1)" @click="setActiveItem(1)">
+        <q-item clickable tag="a" :to="{name: 'customers'}" :active="isActiveItem('customers')">
           <q-item-section avatar>
             <q-icon name="las la-users" />
           </q-item-section>
           <q-item-section>
-            <q-item-label :class="isActiveItem(1) ? 'text-weight-bolder' : 'text-weight-medium'">Customers</q-item-label>
+            <q-item-label :class="isActiveItem('customers') ? 'text-weight-bolder' : 'text-weight-medium'">Customers</q-item-label>
           </q-item-section>
         </q-item>
 
-        <q-item clickable tag="a" to="/library" :active="isActiveItem(2)" @click="setActiveItem(2)">
+        <q-item clickable tag="a" :to="{name: 'library'}" :active="isActiveItem('library')">
           <q-item-section avatar>
             <q-icon name="la la-camera" />
           </q-item-section>
           <q-item-section>
-            <q-item-label :class="isActiveItem(2) ? 'text-weight-bolder' : 'text-weight-medium'">Library</q-item-label>
+            <q-item-label :class="isActiveItem('library') ? 'text-weight-bolder' : 'text-weight-medium'">Library</q-item-label>
           </q-item-section>
         </q-item>
 
-        <q-item clickable tag="a" to="/settings" :active="isActiveItem(3)" @click="setActiveItem(3)">
+        <q-item clickable tag="a" :to="{name: 'settings'}" :active="isActiveItem('settings')">
           <q-item-section avatar>
             <q-icon name="settings" />
           </q-item-section>
           <q-item-section>
-            <q-item-label :class="isActiveItem(3) ? 'text-weight-bolder' : 'text-weight-medium'">Settings</q-item-label>
+            <q-item-label :class="isActiveItem('settings') ? 'text-weight-bolder' : 'text-weight-medium'">Settings</q-item-label>
           </q-item-section>
         </q-item>
 
-        <q-item clickable tag="a" to="/calendar" :active="isActiveItem(4)" @click="setActiveItem(4)">
+        <q-item clickable tag="a" :to="{name: 'calendar'}" :active="isActiveItem('calendar')">
           <q-item-section avatar>
             <q-icon name="la la-calendar" />
           </q-item-section>
           <q-item-section>
-            <q-item-label :class="isActiveItem(4) ? 'text-weight-bolder' : 'text-weight-medium'">Calendar</q-item-label>
+            <q-item-label :class="isActiveItem('calendar') ? 'text-weight-bolder' : 'text-weight-medium'">Calendar</q-item-label>
           </q-item-section>
         </q-item>
 
-        <q-item clickable tag="a" to="/cards" :active="isActiveItem(5)" @click="setActiveItem(5)">
+        <q-item clickable tag="a" :to="{name: 'cards'}" :active="isActiveItem('cards')">
           <q-item-section avatar>
             <q-icon name="la la-address-card" />
           </q-item-section>
           <q-item-section>
-            <q-item-label :class="isActiveItem(5) ? 'text-weight-bolder' : 'text-weight-medium'">Cards</q-item-label>
+            <q-item-label :class="isActiveItem('cards') ? 'text-weight-bolder' : 'text-weight-medium'">Cards</q-item-label>
           </q-item-section>
         </q-item>
 
-        <q-item clickable tag="a" to="/charts" :active="isActiveItem(6)" @click="setActiveItem(6)">
+        <q-item clickable tag="a" :to="{name: 'charts'}" :active="isActiveItem('charts')">
           <q-item-section avatar>
             <q-icon name="la la-chart-bar" />
           </q-item-section>
           <q-item-section>
-            <q-item-label :class="isActiveItem(6) ? 'text-weight-bolder' : 'text-weight-medium'">Charts</q-item-label>
+            <q-item-label :class="isActiveItem('charts') ? 'text-weight-bolder' : 'text-weight-medium'">Charts</q-item-label>
           </q-item-section>
         </q-item>
 
-        <q-item clickable tag="a" to="/login" :active="isActiveItem(7)" @click="setActiveItem(7)">
+        <q-item clickable tag="a" :to="{name: 'login'}" :active="isActiveItem('login')">
           <q-item-section avatar>
             <q-icon name="la la-user" />
           </q-item-section>
           <q-item-section>
-            <q-item-label :class="isActiveItem(7) ? 'text-weight-bolder' : 'text-weight-medium'">Login</q-item-label>
+            <q-item-label :class="isActiveItem('login') ? 'text-weight-bolder' : 'text-weight-medium'">Login</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
@@ -143,6 +143,10 @@
 import {computed, ref} from 'vue';
 import { useQuasar } from 'quasar'
 
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
 const $q = useQuasar()
 
 const behavior = computed(() => {
@@ -155,12 +159,8 @@ const toggleLeftDrawer = () => {
   leftDrawerOpen.value = !leftDrawerOpen.value
 }
 
-const activeItem = ref(0)
-const setActiveItem = (id: number) => {
-  activeItem.value = id
-}
-const isActiveItem = (id: number): boolean => {
-  return activeItem.value === id
+const isActiveItem = (id: string): boolean => {
+  return route.name === id
 }
 
 </script>
