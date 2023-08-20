@@ -22,7 +22,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'settings',
         name: 'settings',
-        component: () => import('pages/IndexPage.vue')},
+        component: () => import('pages/SettingsPage.vue')},
       {
         path: 'calendar',
         name: 'calendar',
