@@ -34,7 +34,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'charts',
         name: 'charts',
-        component: () => import('pages/IndexPage.vue')},
+        component: () => import('pages/ChartsPage.vue')},
     ],
   },
 

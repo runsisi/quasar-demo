@@ -6,3 +6,14 @@ export interface Todo {
 export interface Meta {
   totalCount: number;
 }
+
+export interface PieDataset {
+  [index: string]: any;
+  source: {
+    name: string;
+    value: number;
+    style: {
+      [index: string]: any;
+    };
+  }[];
+}
