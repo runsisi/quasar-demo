@@ -99,6 +99,15 @@
             <q-item-label :class="isActiveItem('login') ? 'text-weight-bolder' : 'text-weight-medium'">Login</q-item-label>
           </q-item-section>
         </q-item>
+
+        <q-item clickable tag="a" :to="{name: 'element'}" :active="isActiveItem('element')">
+          <q-item-section avatar>
+            <q-icon name="fa-brands fa-elementor" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label :class="isActiveItem('element') ? 'text-weight-bolder' : 'text-weight-medium'">Element</q-item-label>
+          </q-item-section>
+        </q-item>
       </q-list>
 
       <div class="absolute-bottom">
