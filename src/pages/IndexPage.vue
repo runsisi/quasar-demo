@@ -246,7 +246,7 @@ const tblData = [
           <q-card-section class="q-pl-none col-12">
             <div class="text-subtitle1 q-pl-md">
               New Customers
-              <q-btn type="a" flat no-caps push href="/customers"
+              <q-btn type="a" flat no-caps push :to="{name: 'customers'}"
                      class="text-grey-8 float-right"
                      style="padding: 4px; min-width: 0px; min-height: 0px;">
                 <span class="block">Show More</span>
